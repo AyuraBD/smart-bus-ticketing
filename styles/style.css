@@ -1,3 +1,9 @@
 .seats li{
     list-style: none;
+    cursor: pointer;
+}
+
+.selected{
+    background-color: #1DD100;
+    color: white;
 }

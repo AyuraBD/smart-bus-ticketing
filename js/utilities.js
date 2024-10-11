@@ -11,8 +11,3 @@ function setValueById (elementId, value){
 }
 
 
-
-
-
-
-

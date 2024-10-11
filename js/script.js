@@ -3,11 +3,8 @@ document.getElementById('seats').addEventListener('click', function(e){
     // Get the passenger selected seat
     const passengerSelected = e.target;
 
-
-
     // Get the number of the selected seat
     const seatName = passengerSelected.innerText;
-
 
     // Add and remove background color of the selected seats
     passengerSelected.classList.toggle('selected');
@@ -78,7 +75,6 @@ document.getElementById('coupon-field').addEventListener('keyup', function(e){
 	const applyBtn = document.getElementById('apply-btn');
 	const couponText = e.target.value;
 
-
 		if(couponText === 'NEW15'){
 			applyBtn.removeAttribute('disabled');
         } else if (couponText === 'COUPLE20'){
@@ -91,12 +87,14 @@ document.getElementById('coupon-field').addEventListener('keyup', function(e){
 function addCoupon (){
     const coupon = document.getElementById('coupon-field');
     const couponText  = coupon.value;
+    const selectedSeats = document.getElementById('selected-seats');
+    const selectedSeatsAmount = selectedSeats.childElementCount;
     if(couponText === 'NEW15'){
         const totalPrice = getTextElementById('selected-seats-amount');
         const calculatePrice = totalPrice * 15 / 100;
         const grandTotal = totalPrice -calculatePrice;
         setValueById('grand-total', grandTotal);
-    } else if(couponText === 'COUPLE20'){
+    } else if(couponText === 'COUPLE20' & selectedSeatsAmount >= 2){
         const totalPrice = getTextElementById('selected-seats-amount');
         const calculatePrice = totalPrice * 20 / 100;
         const grandTotal = totalPrice -calculatePrice;
@@ -105,6 +103,37 @@ function addCoupon (){
     {
         false;
     }
+}
+
+document.getElementById('input-number').addEventListener('keyup', function(e){	
+    const nextBtn = document.getElementById('btn-next');
+    const nextBtnText = e.target.value;
+    const selectedSeats = document.getElementById('selected-seats');
+    const selectedSeatsAmount = selectedSeats.childElementCount;
+
+		if(nextBtnText === '' & selectedSeatsAmount === 0){
+			nextBtn.setAttribute('disabled');
+        } else if (nextBtnText !== null & selectedSeatsAmount >= 1){
+            nextBtn.removeAttribute('disabled');
+        }else {
+            nextBtn.setAttribute('disabled', true);
+        }
+})
+
+function btnNext (){
+    const main = document.getElementById('main');
+    const success = document.getElementById('success');
+
+    main.classList.add('hidden');
+    success.classList.remove('hidden');
+}
+
+function continueBtn(){
+    const main = document.getElementById('main');
+    const success = document.getElementById('success');
+
+    main.classList.remove('hidden');
+    success.classList.add('hidden');
 }
 
 
